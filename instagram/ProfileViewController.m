@@ -10,6 +10,7 @@
 #import "Parse.h"
 #import "Post.h"
 #import "ProfileCollectionCell.h"
+#import "DetailViewController.h"
 @interface ProfileViewController ()
 @property (strong,nonatomic) NSArray *userPosts;
 @property UIImage *image;
@@ -22,11 +23,21 @@
     
     self.nameLabel.text = PFUser.currentUser.username;
     
+    UICollectionViewFlowLayout *layout = self.profileCollectionView.collectionViewLayout;
+    layout.minimumInteritemSpacing = 1;
+    layout.minimumLineSpacing = 1;
+    CGFloat postersPerLine = 3;
+    CGFloat itemWidth = (self.profileCollectionView.frame.size.width - (postersPerLine-1)*layout.minimumInteritemSpacing)/postersPerLine ;
+    CGFloat itemHeight = itemWidth;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
     if(self.image == nil){
         self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
     } else{
         self.profilePicView.image = self.image;
     }
+    
+    
     
     self.profileCollectionView.delegate = self;
     self.profileCollectionView.dataSource = self;
@@ -135,14 +146,33 @@
 //    
 //    [self presentViewController:imagePickerVC animated:YES completion:nil];
 //}
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if([segue.identifier isEqualToString:@"profile-detail-segue"]){
+        
+        ProfileCollectionCell *tappedCell = sender;
+        
+        NSIndexPath *indexPath = [self.profileCollectionView indexPathForCell:tappedCell];
+        Post *thisPost = self.userPosts[indexPath.item];
+        UINavigationController *navigationController = [segue destinationViewController];
+        DetailViewController *detailViewController = (DetailViewController *)navigationController.topViewController;
+        
+        
+        
+        detailViewController.post = thisPost;
+        
+        //DATE STUFF
+        
+        
+        
+    }
 }
-*/
+
 
 @end
