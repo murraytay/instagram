@@ -11,6 +11,9 @@
 #import "ParseUI.h"
 
 @interface FeedCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIButton *commentButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) IBOutlet PFImageView *imageFeedView;
 @property (strong,nonatomic) Post *post;
 @property (strong, nonatomic) IBOutlet UILabel *captionLabel;

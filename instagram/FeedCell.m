@@ -20,11 +20,33 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)didTapLike:(UIButton *)sender {
+    if(self.post.liked){
+        self.post.liked = NO;
+    } else{
+        self.post.liked = YES;
+    }
+    [self layoutCell:self.post];
+}
+- (IBAction)didTapComment:(UIButton *)sender {
+    
+}
 
 - (void)layoutCell:(Post *)post {
     self.post = post;
     self.imageFeedView.file = post[@"image"];
     [self.imageFeedView loadInBackground];
+    
+    self.likesCountLabel.text = [self.post.likeCount stringValue];
+    self.captionLabel.text = self.post.caption;
+    
+    if(self.post.liked){
+        [self.likeButton setImage:[UIImage imageNamed:@"Webp.net-resizeimage (4)"] forState:UIControlStateNormal];
+    } else{
+        [self.likeButton setImage:[UIImage imageNamed:@"Webp.net-resizeimage"] forState:UIControlStateNormal];
+        
+    }
+    
 }
 
 @end

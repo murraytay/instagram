@@ -13,5 +13,4 @@
 
 @property (strong, nonatomic) IBOutlet PFImageView *profilePicView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-
 @end

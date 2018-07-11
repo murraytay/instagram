@@ -30,12 +30,7 @@
     CGFloat itemWidth = (self.profileCollectionView.frame.size.width - (postersPerLine-1)*layout.minimumInteritemSpacing)/postersPerLine ;
     CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
-    
-    if(self.image == nil){
-        self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
-    } else{
-        self.profilePicView.image = self.image;
-    }
+
     
     
     
@@ -46,6 +41,35 @@
     
     
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+//    PFQuery *queryforUser = [PFQuery queryWithClassName:@"PFUser"];
+//    [queryforUser includeKey:@"username"];
+//    [queryforUser whereKey:@"username" equalTo:PFUser.currentUser.username];
+//
+//
+//    [queryforUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable user, NSError * _Nullable error) {
+//        if(error){
+//            NSLog(@"error!");
+//        } else{
+//            if(user.count != 0){
+//                self.profilePicView.file = user[0][@"picture_file"];
+//                [self.profilePicView loadInBackground];
+//            } else{
+//                self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
+//            }
+//        }
+//    }];
+    if(PFUser.currentUser[@"picture_file"] != nil){
+        self.profilePicView.file = PFUser.currentUser[@"picture_file"];
+        [self.profilePicView loadInBackground];
+    } else{
+        self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
+    }
+}
+
+
+
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
@@ -69,8 +93,13 @@
     CGSize safeSize = CGSizeMake(1024, 728);
     
     self.image = [self resizeImage:originalImage withSize:safeSize];
+    
+    PFUser.currentUser[@"picture_file"] = [Post getPFFileFromImage:self.image];
+    [PFUser.currentUser saveInBackgroundWithBlock:nil];
+    
+    
     // Do something with the images (based on your use case)
-    self.profilePicView.image = self.image;
+    //self.profilePicView.image = self.image;
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
     

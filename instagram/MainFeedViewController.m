@@ -95,8 +95,7 @@
     Post *post = self.feedPosts[indexPath.row];
     [cell layoutCell:post];
     
-    cell.likesCountLabel.text = [cell.post[@"likeCount"] stringValue];
-    cell.captionLabel.text = cell.post.caption;
+    
     NSLog(@"%@", cell.captionLabel.text);
     
     return cell;

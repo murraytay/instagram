@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "Parse.h"
+
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -43,6 +44,10 @@
     //newUser.email = self.emailField.text;
     newUser.password = self.passwordField.text;
     
+    
+    
+    
+    
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
@@ -54,11 +59,15 @@
             // manually segue to logged in view
         }
     }];
+    
+    
 }
 
 -(void)loginUser{
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
+    
+    
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
