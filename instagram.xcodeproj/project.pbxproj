@@ -23,6 +23,8 @@
 		A88313CB20F42C5500363E48 /* MainFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88313CA20F42C5500363E48 /* MainFeedViewController.m */; };
 		A88313CE20F4314B00363E48 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = A88313CD20F4314B00363E48 /* Post.m */; };
 		A88313D120F5519400363E48 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88313D020F5519400363E48 /* DetailViewController.m */; };
+		A88313D420F5717400363E48 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88313D320F5717400363E48 /* ProfileViewController.m */; };
+		A88313D720F5754900363E48 /* ProfileCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A88313D620F5754900363E48 /* ProfileCollectionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,10 @@
 		A88313CD20F4314B00363E48 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		A88313CF20F5519400363E48 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		A88313D020F5519400363E48 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		A88313D220F5717400363E48 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		A88313D320F5717400363E48 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		A88313D520F5754900363E48 /* ProfileCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileCollectionCell.h; sourceTree = "<group>"; };
+		A88313D620F5754900363E48 /* ProfileCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileCollectionCell.m; sourceTree = "<group>"; };
 		AFA03B7BD03954A2E2A41EAA /* libPods-instagram.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-instagram.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1B568512EC37A9168D1DC54 /* Pods-instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-instagram/Pods-instagram.debug.xcconfig"; sourceTree = "<group>"; };
 		F7AB77144E63BFF044683F82 /* Pods-instagramUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instagramUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-instagramUITests/Pods-instagramUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +174,10 @@
 				A88313C420F4237C00363E48 /* TakePictureViewController.m */,
 				A88313CF20F5519400363E48 /* DetailViewController.h */,
 				A88313D020F5519400363E48 /* DetailViewController.m */,
+				A88313D220F5717400363E48 /* ProfileViewController.h */,
+				A88313D320F5717400363E48 /* ProfileViewController.m */,
+				A88313D520F5754900363E48 /* ProfileCollectionCell.h */,
+				A88313D620F5754900363E48 /* ProfileCollectionCell.m */,
 				A883138E20F40BCD00363E48 /* Main.storyboard */,
 				A88313CC20F4314B00363E48 /* Post.h */,
 				A88313CD20F4314B00363E48 /* Post.m */,
@@ -415,11 +425,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A883139820F40BCE00363E48 /* main.m in Sources */,
+				A88313D420F5717400363E48 /* ProfileViewController.m in Sources */,
 				A883138A20F40BCD00363E48 /* AppDelegate.m in Sources */,
 				A88313C520F4237C00363E48 /* TakePictureViewController.m in Sources */,
 				A88313D120F5519400363E48 /* DetailViewController.m in Sources */,
 				A88313C820F423DE00363E48 /* FeedCell.m in Sources */,
 				A88313CB20F42C5500363E48 /* MainFeedViewController.m in Sources */,
+				A88313D720F5754900363E48 /* ProfileCollectionCell.m in Sources */,
 				A88313BF20F4197200363E48 /* LoginViewController.m in Sources */,
 				A88313CE20F4314B00363E48 /* Post.m in Sources */,
 			);
