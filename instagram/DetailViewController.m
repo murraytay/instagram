@@ -33,7 +33,7 @@
 
 -(void)setUIMine{
     self.captionLabel.text = self.post.caption;
-    self.likesCountLabel.text = [self.post[@"likeCount"] stringValue];
+    self.likesCountLabel.text = [self.post.likeCount stringValue];
     
     NSDate *createdAtOriginalString = self.post.createdAt;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

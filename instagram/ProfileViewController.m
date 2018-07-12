@@ -14,14 +14,50 @@
 @interface ProfileViewController ()
 @property (strong,nonatomic) NSArray *userPosts;
 @property UIImage *image;
+
 @end
 
 @implementation ProfileViewController
 
+-(void)saveInfoWithImage:(UIImage *)image bio:(NSString *)bio name:(NSString *)name{
+    self.user[@"bio"] = bio;
+    self.user[@"name"] = name;
+    self.user[@"picture_file"] = [Post getPFFileFromImage:image];
+    
+    self.usernameLabel.text = self.user.username;
+    self.nameLabel.text = self.user[@"name"];
+    self.bioLabel.text = self.user[@"bio"];
+    
+    if(self.user[@"picture_file"] != nil){
+        self.profilePicView.file = self.user[@"picture_file"];
+        [self.profilePicView loadInBackground];
+    } else{
+        self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
+    }
+    
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+            NSLog(@"we did it!");
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.nameLabel.text = PFUser.currentUser.username;
+    self.user = PFUser.currentUser;
+    
+    self.usernameLabel.text = self.user.username;
+    self.nameLabel.text = self.user[@"name"];
+    self.bioLabel.text = self.user[@"bio"];
+    
+    if(self.user[@"picture_file"] != nil){
+        self.profilePicView.file = self.user[@"picture_file"];
+        [self.profilePicView loadInBackground];
+    } else{
+        self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
+    }
+
     
     UICollectionViewFlowLayout *layout = self.profileCollectionView.collectionViewLayout;
     layout.minimumInteritemSpacing = 1;
@@ -30,6 +66,7 @@
     CGFloat itemWidth = (self.profileCollectionView.frame.size.width - (postersPerLine-1)*layout.minimumInteritemSpacing)/postersPerLine ;
     CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
 
     
     
@@ -43,25 +80,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-//    PFQuery *queryforUser = [PFQuery queryWithClassName:@"PFUser"];
-//    [queryforUser includeKey:@"username"];
-//    [queryforUser whereKey:@"username" equalTo:PFUser.currentUser.username];
-//
-//
-//    [queryforUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable user, NSError * _Nullable error) {
-//        if(error){
-//            NSLog(@"error!");
-//        } else{
-//            if(user.count != 0){
-//                self.profilePicView.file = user[0][@"picture_file"];
-//                [self.profilePicView loadInBackground];
-//            } else{
-//                self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
-//            }
-//        }
-//    }];
-    if(PFUser.currentUser[@"picture_file"] != nil){
-        self.profilePicView.file = PFUser.currentUser[@"picture_file"];
+    if(self.user[@"picture_file"] != nil){
+        self.profilePicView.file = self.user[@"picture_file"];
         [self.profilePicView loadInBackground];
     } else{
         self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
@@ -94,8 +114,8 @@
     
     self.image = [self resizeImage:originalImage withSize:safeSize];
     
-    PFUser.currentUser[@"picture_file"] = [Post getPFFileFromImage:self.image];
-    [PFUser.currentUser saveInBackgroundWithBlock:nil];
+    self.user[@"picture_file"] = [Post getPFFileFromImage:self.image];
+    [self.user saveInBackgroundWithBlock:nil];
     
     
     // Do something with the images (based on your use case)
@@ -113,7 +133,7 @@
 -(void)fetchMyPosts{
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     query.limit = 20;
-    [query whereKey:@"author" equalTo:PFUser.currentUser];
+    [query whereKey:@"author" equalTo:self.user];
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray * posts, NSError * _Nullable error) {
         if(posts){
@@ -197,9 +217,11 @@
         detailViewController.post = thisPost;
         
         //DATE STUFF
-        
-        
-        
+    
+    } else if([segue.identifier isEqualToString:@"edit-segue"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        EditProfileViewController *editProfileViewController = (EditProfileViewController *)navigationController.topViewController;
+        editProfileViewController.delegate = self;
     }
 }
 

@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ParseUI.h"
-@interface ProfileViewController : UIViewController <UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+#import "EditProfileViewController.h"
+@interface ProfileViewController : UIViewController <UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate, EditProfileViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *profileCollectionView;
+@property (strong, nonatomic) IBOutlet UILabel *bioLabel;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 
 @property (strong, nonatomic) IBOutlet PFImageView *profilePicView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) PFUser *user;
 @end

@@ -23,9 +23,17 @@
 - (IBAction)didTapLike:(UIButton *)sender {
     if(self.post.liked){
         self.post.liked = NO;
+        self.post.likeCount = [NSNumber numberWithInteger:([self.post.likeCount integerValue]-1)];
     } else{
         self.post.liked = YES;
+        self.post.likeCount = [NSNumber numberWithInteger:([self.post.likeCount integerValue]+1)];
+        
     }
+    
+    [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        
+    }];
+    
     [self layoutCell:self.post];
 }
 - (IBAction)didTapComment:(UIButton *)sender {
