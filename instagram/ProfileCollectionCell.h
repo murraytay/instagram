@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ParseUI.h"
+#import "Comment.h"
 @interface ProfileCollectionCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet PFImageView *userPicView;
 

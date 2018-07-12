@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Comment.h"
 @interface TakePictureViewController : UIViewController <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *createPicView;
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse.h"
+#import "Comment.h"
 #import "ParseUI.h"
 @protocol EditProfileViewControllerDelegate
 -(void)saveInfoWithImage:(UIImage *)image bio:(NSString *)bio name:(NSString *)name;

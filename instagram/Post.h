@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse.h>
 #import "User.h"
+#import "Comment.h"
 @interface Post : PFObject<PFSubclassing>
 
 @property (nonatomic,strong) NSString *postID;
@@ -17,8 +18,9 @@
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) PFFile *image;
 @property (nonatomic, strong) NSNumber *likeCount;
+@property (nonatomic, strong) NSArray *comments;
 @property (nonatomic, strong) NSNumber *commentCount;
-@property (nonatomic) BOOL liked;
+@property (nonatomic) NSArray *likedBy;
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 +(PFFile *)getPFFileFromImage:(UIImage *_Nullable)image;

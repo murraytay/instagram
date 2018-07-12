@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "ParseUI.h"
 #import "Post.h"
+#import "Comment.h"
 @interface DetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet PFImageView *imageDetailView;
 @property (strong,nonatomic) Post *post;
 @property (strong, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UIButton *commentButton;
 @property (strong, nonatomic) IBOutlet UILabel *likesCountLabel;
 @end

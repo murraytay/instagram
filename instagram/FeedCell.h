@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 #import "ParseUI.h"
-
+#import "Comment.h"
 @interface FeedCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIButton *commentButton;
-
+@property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) IBOutlet PFImageView *imageFeedView;
 @property (strong,nonatomic) Post *post;

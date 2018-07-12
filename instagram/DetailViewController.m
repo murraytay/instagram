@@ -10,6 +10,7 @@
 #import "DateTools.h"
 #import "ParseUI.h"
 #import "Post.h"
+#import "CommentViewController.h"
 @interface DetailViewController ()
 
 
@@ -21,6 +22,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUIMine];
+}
+- (IBAction)commentAction:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"commentSegue" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,14 +53,20 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if([segue.identifier isEqualToString:@"commentSegue"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        CommentViewController *commentViewController = (CommentViewController *)navigationController.topViewController;
+        commentViewController.post = self.post;
+    }
 }
-*/
+
 
 @end

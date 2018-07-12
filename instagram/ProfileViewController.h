@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ParseUI.h"
 #import "EditProfileViewController.h"
+#import "Comment.h"
 @interface ProfileViewController : UIViewController <UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate, EditProfileViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *profileCollectionView;
 @property (strong, nonatomic) IBOutlet UILabel *bioLabel;

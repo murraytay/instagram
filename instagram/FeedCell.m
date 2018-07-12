@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.user = PFUser.currentUser;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -21,11 +22,27 @@
     // Configure the view for the selected state
 }
 - (IBAction)didTapLike:(UIButton *)sender {
-    if(self.post.liked){
-        self.post.liked = NO;
+    
+    BOOL liked = NO;
+    for(NSString *username in self.post.likedBy){
+        if([self.user.username isEqualToString:username]){
+            liked = YES;
+        }
+    }
+    
+    if(liked){
+        NSMutableArray *oldArray = [NSMutableArray arrayWithArray:self.post.likedBy];
+        [oldArray removeObject:self.user.username];
+        NSArray *myArray = [NSArray arrayWithArray:oldArray];
+        self.post.likedBy = myArray;
         self.post.likeCount = [NSNumber numberWithInteger:([self.post.likeCount integerValue]-1)];
     } else{
-        self.post.liked = YES;
+        
+        NSMutableArray *oldArray = [NSMutableArray arrayWithArray:self.post.likedBy];
+        [oldArray addObject:self.user.username];
+        NSArray *myArray = [NSArray arrayWithArray:oldArray];
+        self.post.likedBy = myArray;
+        
         self.post.likeCount = [NSNumber numberWithInteger:([self.post.likeCount integerValue]+1)];
         
     }
@@ -36,9 +53,7 @@
     
     [self layoutCell:self.post];
 }
-- (IBAction)didTapComment:(UIButton *)sender {
-    
-}
+
 
 - (void)layoutCell:(Post *)post {
     self.post = post;
@@ -48,7 +63,14 @@
     self.likesCountLabel.text = [self.post.likeCount stringValue];
     self.captionLabel.text = self.post.caption;
     
-    if(self.post.liked){
+    BOOL liked = NO;
+    for(NSString *username in self.post.likedBy){
+        if([self.user.username isEqualToString:username]){
+            liked = YES;
+        }
+    }
+    
+    if(liked){
         [self.likeButton setImage:[UIImage imageNamed:@"Webp.net-resizeimage (4)"] forState:UIControlStateNormal];
     } else{
         [self.likeButton setImage:[UIImage imageNamed:@"Webp.net-resizeimage"] forState:UIControlStateNormal];
