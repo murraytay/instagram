@@ -12,6 +12,7 @@
 #import "FeedCell.h"
 #import "DetailViewController.h"
 #import "DateTools.h"
+#import "ParseUI.h"
 @interface MainFeedViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 @property (strong, nonatomic) NSArray *feedPosts;
@@ -120,10 +121,33 @@ NSString *HeaderViewIdentifier = @"TableViewHeaderView";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
+    //UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
     Post *post = self.feedPosts[section];
-    header.textLabel.text = post.author.username;
-    return header;
+    //headerView.textLabel.text = post.author.username;
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 40)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, tableView.frame.size.width, 18)];
+    [label setFont:[UIFont boldSystemFontOfSize:12]];
+    
+    /* Section header is in 0th index... */
+    [label setText:post.author.username];
+    [view addSubview:label];
+    PFImageView *imageView = [[PFImageView alloc] initWithFrame:CGRectMake(5, 0, 30, 30)];
+
+    
+    if(post.author[@"picture_file"] != nil){
+        imageView.file = (PFFile *)post.author[@"picture_file"];
+        [imageView loadInBackground];
+    } else{
+        imageView.image = [UIImage imageNamed:@"profile_tab.png"];
+    }
+    
+    //imageView. = imageView.frame.size.width/2;
+    //imageView.clipsToBounds = TRUE;
+    
+    [view addSubview: imageView];
+    return view;
 }
 
 
@@ -138,7 +162,7 @@ NSString *HeaderViewIdentifier = @"TableViewHeaderView";
          FeedCell *tappedCell = sender;
          
          NSIndexPath *indexPath = [self.feedTableView indexPathForCell:tappedCell];
-         Post *thisPost = self.feedPosts[indexPath.row];
+         Post *thisPost = self.feedPosts[indexPath.section];
          UINavigationController *navigationController = [segue destinationViewController];
          DetailViewController *detailViewController = (DetailViewController *)navigationController.topViewController;
          

@@ -7,7 +7,7 @@
 //
 
 #import "FeedCell.h"
-
+#import "DateTools.h"
 @implementation FeedCell
 
 - (void)awakeFromNib {
@@ -76,6 +76,7 @@
         [self.likeButton setImage:[UIImage imageNamed:@"Webp.net-resizeimage"] forState:UIControlStateNormal];
         
     }
+    self.dateLabel.text = self.post.createdAt.timeAgoSinceNow;
     
 }
 

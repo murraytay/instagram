@@ -57,7 +57,8 @@
     } else{
         self.profilePicView.image = [UIImage imageNamed:@"image_placeholder.png"];
     }
-
+    self.profilePicView.layer.cornerRadius = self.profilePicView.frame.size.width/2;
+    self.profilePicView.clipsToBounds = TRUE;
     
     UICollectionViewFlowLayout *layout = self.profileCollectionView.collectionViewLayout;
     layout.minimumInteritemSpacing = 1;
