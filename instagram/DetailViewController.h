@@ -11,6 +11,7 @@
 #import "Post.h"
 #import "Comment.h"
 @interface DetailViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet PFImageView *imageDetailView;
 @property (strong,nonatomic) Post *post;
 @property (strong, nonatomic) IBOutlet UILabel *captionLabel;

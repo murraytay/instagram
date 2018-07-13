@@ -11,6 +11,7 @@
 #import "ParseUI.h"
 #import "Post.h"
 #import "CommentViewController.h"
+#import "ProfileViewController.h"
 @interface DetailViewController ()
 
 
@@ -34,11 +35,14 @@
 - (IBAction)cancelAction:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (IBAction)usernameTapped:(UITapGestureRecognizer *)sender {
+    [self performSegueWithIdentifier:@"detailSegue" sender:self];
+}
 
 -(void)setUIMine{
     self.captionLabel.text = self.post.caption;
     self.likesCountLabel.text = [self.post.likeCount stringValue];
-    
+    self.usernameLabel.text = self.post.author.username;
     NSDate *createdAtOriginalString = self.post.createdAt;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     //Configure the input format to parse the date
@@ -65,6 +69,9 @@
         UINavigationController *navigationController = [segue destinationViewController];
         CommentViewController *commentViewController = (CommentViewController *)navigationController.topViewController;
         commentViewController.post = self.post;
+    } else if([segue.identifier isEqualToString:@"detailSegue"]){
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        profileViewController.user = self.post.author;
     }
 }
 

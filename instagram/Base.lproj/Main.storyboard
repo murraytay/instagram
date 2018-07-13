@@ -452,7 +452,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="5Ju-Va-Quk">
-                                <rect key="frame" x="16" y="447" width="56" height="59.5"/>
+                                <rect key="frame" x="16" y="489.5" width="56" height="59.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IoM-T9-hyz">
                                         <rect key="frame" x="0.0" y="0.0" width="48.5" height="17"/>
@@ -490,22 +490,40 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RvZ-Db-hXu">
-                                <rect key="frame" x="329" y="447" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RvZ-Db-hXu">
+                                <rect key="frame" x="340" y="447" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0aE-Wy-7x7"/>
+                                    <constraint firstAttribute="width" constant="30" id="KYE-TE-vvC"/>
+                                </constraints>
                                 <state key="normal" image="Webp.net-resizeimage (8)"/>
                                 <connections>
                                     <action selector="commentAction:" destination="y0d-3x-NbD" eventType="touchUpInside" id="3Ij-Df-0Ay"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NsJ-Jk-Cke">
+                                <rect key="frame" x="16" y="447" width="316" height="20.5"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="oga-dd-HwT" appends="YES" id="E4j-PA-cpP"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fSs-vc-BqT" firstAttribute="trailing" secondItem="RvZ-Db-hXu" secondAttribute="trailing" constant="5" id="4Si-Bb-v7w"/>
+                            <constraint firstItem="RvZ-Db-hXu" firstAttribute="top" secondItem="Ink-NL-1Aa" secondAttribute="bottom" constant="8" id="5dg-rc-snZ"/>
+                            <constraint firstItem="5Ju-Va-Quk" firstAttribute="top" secondItem="NsJ-Jk-Cke" secondAttribute="bottom" constant="22" id="955-2t-T2c"/>
+                            <constraint firstItem="NsJ-Jk-Cke" firstAttribute="leading" secondItem="fSs-vc-BqT" secondAttribute="leading" constant="16" id="AfP-pE-CpX"/>
                             <constraint firstItem="Ink-NL-1Aa" firstAttribute="leading" secondItem="fSs-vc-BqT" secondAttribute="leading" id="F4W-lu-fl5"/>
                             <constraint firstItem="Ink-NL-1Aa" firstAttribute="trailing" secondItem="fSs-vc-BqT" secondAttribute="trailing" id="Gf3-Cb-H1Z"/>
-                            <constraint firstItem="5Ju-Va-Quk" firstAttribute="leading" secondItem="nA2-QB-9xb" secondAttribute="leading" constant="16" id="frO-LI-2FM"/>
+                            <constraint firstItem="5Ju-Va-Quk" firstAttribute="leading" secondItem="nA2-QB-9xb" secondAttribute="leading" constant="16" id="Xx5-6F-Dky"/>
+                            <constraint firstItem="NsJ-Jk-Cke" firstAttribute="top" secondItem="Ink-NL-1Aa" secondAttribute="bottom" constant="8" id="bfL-x2-bIT"/>
+                            <constraint firstItem="RvZ-Db-hXu" firstAttribute="leading" secondItem="NsJ-Jk-Cke" secondAttribute="trailing" constant="8" id="fz9-qg-PdI"/>
                             <constraint firstItem="Ink-NL-1Aa" firstAttribute="top" secondItem="fSs-vc-BqT" secondAttribute="top" id="icN-OD-rOX"/>
-                            <constraint firstItem="5Ju-Va-Quk" firstAttribute="top" secondItem="Ink-NL-1Aa" secondAttribute="bottom" constant="8" id="mET-XQ-M4k"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fSs-vc-BqT"/>
                     </view>
@@ -522,10 +540,17 @@
                         <outlet property="dateLabel" destination="SBm-xk-aK7" id="hSV-g2-Uxu"/>
                         <outlet property="imageDetailView" destination="Ink-NL-1Aa" id="5ts-M9-hvb"/>
                         <outlet property="likesCountLabel" destination="wO0-WO-nhi" id="aXT-Mb-NQt"/>
+                        <outlet property="usernameLabel" destination="NsJ-Jk-Cke" id="HdF-h3-cxg"/>
                         <segue destination="kgl-3K-cqe" kind="show" identifier="commentSegue" id="fcf-Rv-mhm"/>
+                        <segue destination="pmb-Fs-oAI" kind="show" identifier="detailSegue" id="9vV-91-Ibj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7f6-xi-OeS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="oga-dd-HwT">
+                    <connections>
+                        <action selector="usernameTapped:" destination="y0d-3x-NbD" id="Bcg-j5-HBW"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3716" y="972.86356821589209"/>
         </scene>
@@ -814,5 +839,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MQ3-FV-elo"/>
+        <segue reference="9vV-91-Ibj"/>
     </inferredMetricsTieBreakers>
 </document>

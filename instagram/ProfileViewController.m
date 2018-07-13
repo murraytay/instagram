@@ -45,7 +45,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.user = PFUser.currentUser;
+    if(self.user == nil){
+        self.user = PFUser.currentUser;
+    }
     
     self.usernameLabel.text = self.user.username;
     self.nameLabel.text = self.user[@"name"];

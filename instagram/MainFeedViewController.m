@@ -142,7 +142,8 @@ NSString *HeaderViewIdentifier = @"TableViewHeaderView";
     } else{
         imageView.image = [UIImage imageNamed:@"profile_tab.png"];
     }
-    
+    imageView.layer.cornerRadius = imageView.frame.size.width/2;
+    imageView.clipsToBounds = TRUE;
     //imageView. = imageView.frame.size.width/2;
     //imageView.clipsToBounds = TRUE;
     
