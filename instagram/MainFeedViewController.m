@@ -16,9 +16,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *feedTableView;
 @property (strong, nonatomic) NSArray *feedPosts;
 @property (strong,nonatomic) UIRefreshControl *refreshControl;
+
 @end
 
 @implementation MainFeedViewController
+
+NSString *HeaderViewIdentifier = @"TableViewHeaderView";
+
 - (IBAction)logoutAction:(UIBarButtonItem *)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if(error == nil){
@@ -32,6 +36,10 @@
     
     
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.feedPosts.count;
+}
+
 - (IBAction)createAction:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"create-segue" sender:nil];
 }
@@ -41,6 +49,8 @@
     // Do any additional setup after loading the view.
     self.feedTableView.delegate = self;
     self.feedTableView.dataSource = self;
+    [self.feedTableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:HeaderViewIdentifier];
+
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPostsScroll) forControlEvents:UIControlEventValueChanged];
@@ -52,6 +62,7 @@
 -(void)fetchPostsScroll{
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
     query.limit = 20;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * posts, NSError * _Nullable error) {
@@ -68,9 +79,12 @@
 }
 
 -(void)fetchPosts{
-    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-    query.limit = 20;
+    PFQuery *query = [Post query];
+    [query includeKey:@"author"];
     [query orderByDescending:@"createdAt"];
+
+    query.limit = 20;
+
     [query findObjectsInBackgroundWithBlock:^(NSArray * posts, NSError * _Nullable error) {
         if(posts){
             self.feedPosts = posts;
@@ -93,7 +107,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell"];
     
-    Post *post = self.feedPosts[indexPath.row];
+    Post *post = self.feedPosts[indexPath.section];
     [cell layoutCell:post];
     
     
@@ -102,7 +116,14 @@
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.feedPosts.count;
+    return 1;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
+    Post *post = self.feedPosts[section];
+    header.textLabel.text = post.author.username;
+    return header;
 }
 
 
