@@ -317,27 +317,30 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yxf-MO-II9">
-                                                    <rect key="frame" x="15" y="422" width="47.5" height="38"/>
+                                                    <rect key="frame" x="15" y="422" width="352" height="38"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QKZ-SU-2AE">
-                                                            <rect key="frame" x="0.0" y="0.0" width="47.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="352" height="17"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9U-xM-0p2">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9U-xM-0p2">
                                                                     <rect key="frame" x="0.0" y="0.0" width="9" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQF-VD-vGy">
-                                                                    <rect key="frame" x="14" y="0.0" width="33.5" height="17"/>
+                                                                    <rect key="frame" x="14" y="0.0" width="338" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="JQF-VD-vGy" firstAttribute="leading" secondItem="x9U-xM-0p2" secondAttribute="trailing" constant="5" id="8uL-3E-eoY"/>
+                                                            </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tx-sb-AMc">
-                                                            <rect key="frame" x="0.0" y="21" width="47.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="21" width="352" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -368,6 +371,7 @@
                                                 <constraint firstItem="QKZ-SU-2AE" firstAttribute="top" secondItem="EdA-Lz-dIH" secondAttribute="bottom" constant="9" id="53l-NW-oJd"/>
                                                 <constraint firstAttribute="trailing" secondItem="chR-et-K5d" secondAttribute="trailing" id="Hns-Db-ec3"/>
                                                 <constraint firstItem="chR-et-K5d" firstAttribute="top" secondItem="q6l-qu-uez" secondAttribute="top" id="MZ7-SS-g7P"/>
+                                                <constraint firstAttribute="trailing" secondItem="yxf-MO-II9" secondAttribute="trailing" constant="8" id="MbP-x5-IiV"/>
                                                 <constraint firstItem="yxf-MO-II9" firstAttribute="top" secondItem="gQi-Bp-Hq7" secondAttribute="bottom" constant="9" id="N8K-dD-AJc"/>
                                                 <constraint firstItem="chR-et-K5d" firstAttribute="leading" secondItem="q6l-qu-uez" secondAttribute="leading" id="Swf-oM-IJo"/>
                                                 <constraint firstItem="gQi-Bp-Hq7" firstAttribute="top" secondItem="chR-et-K5d" secondAttribute="bottom" constant="8" id="bP0-nv-35y"/>
@@ -658,13 +662,23 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyW-UO-RLQ">
+                                                    <rect key="frame" x="80" y="61" width="280" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Hw4-Jr-Lzr" secondAttribute="trailing" constant="15" id="0Su-Yy-FIo"/>
+                                                <constraint firstAttribute="trailing" secondItem="VyW-UO-RLQ" secondAttribute="trailing" constant="15" id="FiR-Lt-A2J"/>
                                                 <constraint firstItem="pVD-gV-EpY" firstAttribute="leading" secondItem="uOF-20-5io" secondAttribute="leading" constant="15" id="RWp-Wi-l4q"/>
+                                                <constraint firstItem="VyW-UO-RLQ" firstAttribute="top" secondItem="FJQ-7t-Ciw" secondAttribute="bottom" constant="10" id="VVj-gZ-dgy"/>
                                                 <constraint firstItem="Hw4-Jr-Lzr" firstAttribute="leading" secondItem="pVD-gV-EpY" secondAttribute="trailing" constant="8" id="XAs-Go-alu"/>
+                                                <constraint firstAttribute="bottom" secondItem="VyW-UO-RLQ" secondAttribute="bottom" constant="10.5" id="bSZ-w5-H7a"/>
                                                 <constraint firstItem="Hw4-Jr-Lzr" firstAttribute="top" secondItem="uOF-20-5io" secondAttribute="top" constant="11" id="cpf-Xl-a6p"/>
                                                 <constraint firstAttribute="trailing" secondItem="FJQ-7t-Ciw" secondAttribute="trailing" constant="15" id="hvt-3M-uMN"/>
+                                                <constraint firstItem="VyW-UO-RLQ" firstAttribute="leading" secondItem="pVD-gV-EpY" secondAttribute="trailing" constant="8" id="n62-jb-cNn"/>
                                                 <constraint firstItem="FJQ-7t-Ciw" firstAttribute="leading" secondItem="pVD-gV-EpY" secondAttribute="trailing" constant="8" id="psx-lh-9Mc"/>
                                                 <constraint firstItem="pVD-gV-EpY" firstAttribute="top" secondItem="uOF-20-5io" secondAttribute="top" constant="11" id="uav-le-VdJ"/>
                                                 <constraint firstItem="FJQ-7t-Ciw" firstAttribute="top" secondItem="Hw4-Jr-Lzr" secondAttribute="bottom" constant="4" id="xRD-tU-WmR"/>
@@ -672,6 +686,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentLabel" destination="FJQ-7t-Ciw" id="fJi-xI-nUn"/>
+                                            <outlet property="dateLabel" destination="VyW-UO-RLQ" id="c67-yK-R2n"/>
                                             <outlet property="profileCommentPicView" destination="pVD-gV-EpY" id="Tg4-2t-I1T"/>
                                             <outlet property="usernameLabel" destination="Hw4-Jr-Lzr" id="Za5-cA-PVa"/>
                                         </connections>

@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Parse.h"
-@interface Comment : NSObject
-@property (strong, nonatomic) PFUser *user;
+@interface Comment : PFObject<PFSubclassing>
+@property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSDate *createdAt;
-
-+(Comment *)initWithText:(NSString *)myString;
+@property (strong, nonatomic) NSString *caption;
++(Comment *)initWithText:(NSString *)myString andPostCaption:(NSString *)caption;
 @end

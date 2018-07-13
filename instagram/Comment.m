@@ -8,11 +8,27 @@
 
 #import "Comment.h"
 
+
 @implementation Comment
-+(Comment *)initWithText:(NSString *)myString{
+@dynamic username;
+//@dynamic profilePicImage;
+@dynamic text;
+@dynamic caption;
+@dynamic createdAt;
+
++(Comment *)initWithText:(NSString *)myString andPostCaption:(NSString *)caption{
     Comment *comment = [Comment new];
     
-    comment.user = PFUser.currentUser;
+    PFUser *instace = PFUser.currentUser;
+    comment.username = instace.username;
+    
+//    PFFile *file = instace[@"picture_file"];
+//    [file getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+//        if(data){
+//            comment.profilePicImage = [UIImage imageWithData:data];
+//        }
+//    }];
+    comment.caption = caption;
     comment.text = myString;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -21,4 +37,9 @@
     comment.createdAt = [NSDate date];
     return comment;
 }
++ (nonnull NSString *)parseClassName {
+    return @"Comment";
+}
+
+
 @end

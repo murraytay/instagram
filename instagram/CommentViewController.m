@@ -9,12 +9,13 @@
 #import "CommentViewController.h"
 #import "CommentCellTableViewCell.h"
 #import "Comment.h"
+#import "DateTools.h"
 @interface CommentViewController ()
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) IBOutlet PFImageView *currentUserProfilePic;
 @property (strong, nonatomic) IBOutlet UIButton *postCommentButton;
 @property (strong, nonatomic) IBOutlet UITextField *commentTextField;
-
+@property (strong, nonatomic) NSArray *comments;
 @end
 
 @implementation CommentViewController
@@ -33,7 +34,7 @@
     } else{
         self.currentUserProfilePic.image = [UIImage imageNamed:@"image_placeholder.png"];
     }
-    
+    [self fetchComments];
     [self.commentTableView reloadData];
     
 }
@@ -41,23 +42,40 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)fetchComments{
+    PFQuery *queryForComment = [PFQuery queryWithClassName:@"Comment"];
+    queryForComment.limit = 20;
+    [queryForComment whereKey:@"caption" equalTo:self.post.caption];
+    [queryForComment findObjectsInBackgroundWithBlock:^(NSArray * _Nullable commentsWeGot, NSError * _Nullable error) {
+        if(commentsWeGot){
+            self.comments = commentsWeGot;
+        } else{
+            NSLog(@"no comments or we crashed...");
+        }
+        [self.commentTableView reloadData];
+    }];
+}
+
 - (IBAction)postCommentAction:(UIButton *)sender {
-    //Comment *comment = [Comment initWithText:self.commentTextField.text];
-    NSMutableArray *oldArray = [NSMutableArray arrayWithArray:self.post.comments];
-    //[oldArray addObject:comment];
-    [oldArray addObject:self.commentTextField.text];
+    Comment *comment = [Comment initWithText:self.commentTextField.text andPostCaption:self.post.caption];
+    NSMutableArray *oldArray = [NSMutableArray arrayWithArray:self.post.commentsClass];
+    [oldArray addObject:comment];
+    //[oldArray addObject:self.commentTextField.text];
     NSArray *myArray = [NSArray arrayWithArray:oldArray];
-    self.post.comments = myArray;
+    self.post.commentsClass = myArray;
     self.post.commentCount = [NSNumber numberWithInteger:[self.post.commentCount integerValue] + 1];
     
-    
+    [comment saveInBackground];
     
     [self.post saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"we freaking succeeded!");
         }
+        [self fetchComments];
         [self.commentTableView reloadData];
     }];
+    
+    
     
     self.commentTextField.text = @"";
    
@@ -73,17 +91,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CommentCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCellTableViewCell"];
     
-//    Comment *currentComment = self.post.comments[indexPath.row];
-//    cell.commentLabel.text = currentComment.text;
-//    cell.profileCommentPicView.file = currentComment.user[@"picture_file"];
-//    [cell.profileCommentPicView loadInBackground];
-//    cell.usernameLabel.text = currentComment.user.username;
-    NSString *currentComment = self.post.comments[indexPath.row];
-    cell.commentLabel.text = currentComment;
+    
+    
+    
+    Comment *currentComment = self.comments[indexPath.row];
+    cell.commentLabel.text = currentComment.text;
+    //cell.profileCommentPicView.image = currentComment.profilePicImage;
+    cell.usernameLabel.text = currentComment.username;
+    cell.dateLabel.text = currentComment.createdAt.timeAgoSinceNow;
+    
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.post.comments.count;
+    return self.comments.count;
 }
 
 /*

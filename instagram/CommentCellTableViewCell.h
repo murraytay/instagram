@@ -13,5 +13,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet PFImageView *profileCommentPicView;
 @property (strong, nonatomic) IBOutlet UILabel *commentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
