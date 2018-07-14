@@ -45,6 +45,7 @@
 -(void)fetchComments{
     PFQuery *queryForComment = [PFQuery queryWithClassName:@"Comment"];
     queryForComment.limit = 20;
+    [queryForComment orderByDescending:@"createdAt"];
     [queryForComment whereKey:@"caption" equalTo:self.post.caption];
     [queryForComment findObjectsInBackgroundWithBlock:^(NSArray * _Nullable commentsWeGot, NSError * _Nullable error) {
         if(commentsWeGot){
@@ -99,6 +100,14 @@
     //cell.profileCommentPicView.image = currentComment.profilePicImage;
     cell.usernameLabel.text = currentComment.username;
     cell.dateLabel.text = currentComment.createdAt.timeAgoSinceNow;
+    if(currentComment.file != nil){
+        cell.profileCommentPicView.file = (PFFile *)currentComment.file;
+        [cell.profileCommentPicView loadInBackground];
+    } else{
+        cell.profileCommentPicView.image = [UIImage imageNamed:@"profile_tab.png"];
+    }
+    cell.profileCommentPicView.layer.cornerRadius = cell.profileCommentPicView.frame.size.width/2;
+    cell.profileCommentPicView.clipsToBounds = TRUE;
     
     return cell;
 }

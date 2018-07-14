@@ -15,6 +15,7 @@
 @dynamic text;
 @dynamic caption;
 @dynamic createdAt;
+@dynamic file;
 
 +(Comment *)initWithText:(NSString *)myString andPostCaption:(NSString *)caption{
     Comment *comment = [Comment new];
@@ -22,12 +23,11 @@
     PFUser *instace = PFUser.currentUser;
     comment.username = instace.username;
     
-//    PFFile *file = instace[@"picture_file"];
-//    [file getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-//        if(data){
-//            comment.profilePicImage = [UIImage imageWithData:data];
-//        }
-//    }];
+    if(instace[@"picture_file"]){
+        comment.file = instace[@"picture_file"];
+    }
+    
+    
     comment.caption = caption;
     comment.text = myString;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];

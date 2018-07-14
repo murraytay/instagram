@@ -13,5 +13,7 @@
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSDate *createdAt;
 @property (strong, nonatomic) NSString *caption;
+@property (strong, nonnull) PFFile *file;
+
 +(Comment *)initWithText:(NSString *)myString andPostCaption:(NSString *)caption;
 @end
