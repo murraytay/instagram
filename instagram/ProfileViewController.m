@@ -70,7 +70,7 @@
     CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
-
+    //self.postsLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.userPosts.count];
     
     
     
@@ -136,6 +136,7 @@
 -(void)fetchMyPosts{
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     query.limit = 20;
+    [query includeKey:@"author"];
     [query whereKey:@"author" equalTo:self.user];
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray * posts, NSError * _Nullable error) {

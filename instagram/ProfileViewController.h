@@ -11,6 +11,7 @@
 #import "EditProfileViewController.h"
 #import "Comment.h"
 @interface ProfileViewController : UIViewController <UICollectionViewDelegate,UICollectionViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate, EditProfileViewControllerDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *postsLabel;
 @property (strong, nonatomic) IBOutlet UICollectionView *profileCollectionView;
 @property (strong, nonatomic) IBOutlet UILabel *bioLabel;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
