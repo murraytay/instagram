@@ -39,8 +39,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. ways to segue from elements in a cell!
+2. when to use delegates or just input somehting in the segue
 
 ## Video Walkthrough
 
